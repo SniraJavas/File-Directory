@@ -14,6 +14,6 @@ export class FileService {
    * This method returns students details
    */
   getFileInformation(): Observable<File[]>{
-    return this.httpClient.get<File[]>(`${environment.baseURL}/directories`);
+    return this.httpClient.get<File[]>(`${environment.baseURL}directories`);
   }
 }
