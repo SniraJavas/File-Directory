@@ -1,3 +1,5 @@
+import { Content } from "./content";
+
 class File {
     filename!: String;
     isDirectory!: boolean;
@@ -5,7 +7,7 @@ class File {
     size!: String;
     createdDate!: Date;
     type!: String;
-    content!: String;
+    content!: Content;
 }
 
 export default File;
