@@ -4,7 +4,7 @@ export class File {
     filename!: String;
     isDirectory!: boolean;
     path!: String;
-    size!: String;
+    size!: number;
     createdDate!: Date;
     type!: String;
     content!: Content;
