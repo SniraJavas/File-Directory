@@ -9,7 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSortModule} from '@angular/material/sort';
 import { FileListComponent } from './components/file-list/file-list.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,8 @@ import { FileListComponent } from './components/file-list/file-list.component';
     MatProgressSpinnerModule,
     MatInputModule,
     MatPaginatorModule,
+    FontAwesomeModule
+    
   ],
   exports : [
     PublicRoutingModule,

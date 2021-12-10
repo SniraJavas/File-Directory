@@ -3,20 +3,25 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table w-auto">
     <!-- Symbol Column -->
     <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef>symbol</th>
-      <td mat-cell *matCellDef="let element">font awesome</td>
+      <th class="m-5" mat-header-cell *matHeaderCellDef>symbol</th>
+      <td class="m-5" mat-cell *matCellDef="let element">
+        <div *ngIf="!element.isDirectory">
+          <fa-icon [icon]="faFile"></fa-icon>
+        </div>
+        <div *ngIf="element.isDirectory"><fa-icon [icon]="faFolderPlus"></fa-icon></div>
+      </td>
     </ng-container>
   
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{element.filename}}</td>
+    <ng-container class="m-10" matColumnDef="name">
+      <th class="m-10" mat-header-cell *matHeaderCellDef>Name</th>
+      <td class="m-10" mat-cell *matCellDef="let element">{{element.filename}}</td>
     </ng-container>
   
     <!-- Extension Column -->
     <ng-container matColumnDef="extension">
       <th mat-header-cell *matHeaderCellDef>Extension</th>
-      <td mat-cell *matCellDef="let element">{{element.type}}</td>
+      <td mat-cell *matCellDef="let element"><div *ngIf="!element.isDirectory">{{element.type}}</div></td>
     </ng-container>
   
     <!-- Path Column -->
@@ -28,13 +33,13 @@
      <!-- Size Column -->
      <ng-container matColumnDef="size">
       <th mat-header-cell *matHeaderCellDef>Size(in Bytes)</th>
-      <td mat-cell *matCellDef="let element">{{element.size}}</td>
+      <td mat-cell *matCellDef="let element"><div *ngIf="!element.isDirectory">{{element.size}}</div></td>
     </ng-container>
   
      <!-- Date Column -->
      <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let element">{{element.createdDate}}</td>
+      <td mat-cell *matCellDef="let element">{{element.createdDate | slice:2}}</td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr

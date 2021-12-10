@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileService } from '../../http/file.service';
 import { File } from '../../models/file';
-
+import { faFolderPlus ,faFile} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-file-list',
@@ -16,7 +16,8 @@ import { File } from '../../models/file';
 export class FileListComponent implements OnInit {
 
   files: File[] = [];
-
+  faFolderPlus = faFolderPlus;
+  faFile = faFile;
   displayedColumns: string[] = ['symbol','name', 'extension', 'path','size', 'date'];
   dataSource = new MatTableDataSource<File>();
   clickedRows = new Set<File>();
@@ -31,7 +32,7 @@ export class FileListComponent implements OnInit {
     this.FileApiService.getFileInformation().subscribe({
       next: data => {
 
-          this.files = data;
+          this.files = data.sort((a,b) => (a.isDirectory < b.isDirectory) ? 1 : ((b.isDirectory < a.isDirectory) ? -1 : 0));
           this.dataSource.data = this.files ;
       },
       error: error => {
