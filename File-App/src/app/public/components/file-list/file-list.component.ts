@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileService } from '../../http/file.service';
+import { File } from '../../models/file';
+
 
 @Component({
   selector: 'app-file-list',
@@ -8,12 +10,16 @@ import { FileService } from '../../http/file.service';
   styleUrls: ['./file-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+
+
 export class FileListComponent implements OnInit {
 
   files: File[] = [];
-  public displayedColumns = ['Name', 'Extension', 'Path','Size', 'Date Created'];
-  public dataSource = new MatTableDataSource<File>();
 
+  displayedColumns: string[] = ['symbol','name', 'extension', 'path','size', 'date'];
+  dataSource = new MatTableDataSource<File>();
+  clickedRows = new Set<File>();
   constructor(private FileApiService : FileService) { }
 
   ngOnInit(): void {
@@ -22,12 +28,17 @@ export class FileListComponent implements OnInit {
 
 
   getFilesInformation(){
-    this.FileApiService.getFileInformation()
-      .subscribe((res)=>{
-        console.log(res);
-        this.files = res;
-        this.dataSource.data = res;
-      })
+    this.FileApiService.getFileInformation().subscribe({
+      next: data => {
+
+          this.files = data;
+          this.dataSource.data = this.files ;
+      },
+      error: error => {
+          console.error('There was an error!', error.message);
+      }
+  })
+    
   }
 
 }

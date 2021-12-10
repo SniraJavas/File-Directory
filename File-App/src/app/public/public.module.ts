@@ -20,13 +20,13 @@ import { FileListComponent } from './components/file-list/file-list.component';
     CommonModule,
     PublicRoutingModule,
     SharedModule,
-  ],
-  exports : [
     MatTableModule,
     MatSortModule,
     MatProgressSpinnerModule,
     MatInputModule,
     MatPaginatorModule,
+  ],
+  exports : [
     PublicRoutingModule,
     FileListComponent
   ]

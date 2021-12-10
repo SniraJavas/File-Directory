@@ -5,6 +5,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PublicModule } from './public/public.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -16,6 +21,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     PublicModule,
     HttpClientModule,
+    MatTableModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatInputModule,
+    MatPaginatorModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
