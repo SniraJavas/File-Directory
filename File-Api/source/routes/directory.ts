@@ -4,6 +4,6 @@ import controller from '../controllers/directory';
 const router = express.Router();
 
 router.get('/directories', controller.getDirectories);
-// router.get('/directory/:id', controller.getDirectory);
+router.get('/directory', controller.getDirectory);
 
 export = router;

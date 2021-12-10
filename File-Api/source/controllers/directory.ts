@@ -51,9 +51,48 @@ const getDirectories = async (req: Request, res: Response, next: NextFunction) =
         result.push(tempFile);
     });
     let Files: File[]  = result;
-    return res.status(200).json({
-        results: result
-    });
+    return res.status(200).json(result);
 };
 
-export default { getDirectories};
+const getDirectory = async (req: Request, res: Response, next: NextFunction) => {
+    // get the post id from the req
+    const fileUrl: string = req.body.url;
+    let result: File[] = [] ;
+    let content , type;
+    fs.readdirSync(fileUrl).forEach((file: any) => {
+        let  stats= fs.statSync(path.join(fileUrl,file));
+        let filename = file; //file name
+        let url = path.join(fileUrl,file); //path url
+        let fileSizeInBytes = stats.size; 
+        let size = fileSizeInBytes; // file size in bytes
+        let date  = stats.birthtime; // created date 2021-12-08T12:04:04.915Z
+        
+        let isDirectory = stats.isDirectory();
+        if(isDirectory == false){
+            content = fs.readFileSync(url);
+           type = filename.split('.')[1] // extension
+        }else{
+           content = "null";
+           type = "null";
+        }
+        
+
+       
+        
+        let tempFile : File  = {
+            filename: filename,
+            path: url,
+            size: size,
+            createdDate: date,
+            type: type,
+            content : isDirectory === true ?  "" : content,
+            isDirectory : isDirectory
+        }
+        
+        result.push(tempFile);
+    });
+    let Files: File[]  = result;
+    return res.status(200).json(result);
+};
+
+export default { getDirectories,getDirectory};
